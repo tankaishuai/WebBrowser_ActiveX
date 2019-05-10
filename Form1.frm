@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{844D93BA-B24B-420C-A010-F8A96621C63B}#1.0#0"; "ExtBasic.ocx"
 Begin VB.Form Form1 
-   Caption         =   "Form1"
+   Caption         =   "double click direct call line()"
    ClientHeight    =   5580
    ClientLeft      =   120
    ClientTop       =   465
@@ -45,7 +45,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Command1_Click()
     hr = ExtBasic1.InitWebKit("", 0)
-    ExtBasic1.LoadUrl "http://www.baidu.com"
+    ExtBasic1.RegisterObject "form1", Me
+    ExtBasic1.LoadUrl App.Path + "\test_WebBrowser_ActiveX.html"   '"http://www.baidu.com"
 End Sub
 
 Private Sub Command2_Click()
@@ -61,3 +62,22 @@ Private Sub ExtBasic1_OnLoadEnd(ByVal bstrUrl As String, ByVal statusCode As Lon
     End If
     MsgBox Left(strText, 32), vbOKOnly, bstrUrl
 End Sub
+
+Private Sub Form_DblClick()
+    Call Me.Line(0, 0, 0, 5000, 4000, 255)
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    ExtBasic1.UnInitWebKit
+End Sub
+
+Public Function ListSymEx(ByRef dispId As Long) As String
+    MsgBox "called ListSymEx: " + CStr(dispId)
+    ListSymEx = ""
+End Function
+
+Public Function Form_ListSymEx(ByRef dispId As Long) As String
+    MsgBox "called ListSymEx: " + CStr(dispId)
+    Form_ListSymEx = ""
+End Function
+
