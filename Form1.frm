@@ -77,7 +77,7 @@ Public Function ListSymEx(ByRef dispId As Long) As String
 End Function
 
 Public Function Form_ListSymEx(ByRef dispId As Long) As String
-    MsgBox "called ListSymEx: " + CStr(dispId)
+    MsgBox "called Form_ListSymEx: " + CStr(dispId)
     Form_ListSymEx = ""
 End Function
 
